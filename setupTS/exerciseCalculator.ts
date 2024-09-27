@@ -1,4 +1,16 @@
+interface ArgsValue {
+    value1: number,
+    value2: number[]
+}
 
+const parseArguments = (args: string[]): ArgsValue => {
+    return {
+        value1: Number(args[2]),
+        value2: args.slice(3).map(Number).filter(num => !isNaN(num))
+    }
+}
+
+const args = process.argv.slice(2);
 
 interface CalculatedValue {
     periodLength: number,
@@ -19,7 +31,7 @@ function calculateExercises(hours: number[], duration: number): CalculatedValue 
     if (trainingDays < 3) {
         rating = 1
         ratingDescription = 'Poor Performance. You can do better!!'
-    } else if (trainingDays < 6) {
+    } else if (trainingDays < 7) {
         rating = 2
         ratingDescription = 'Well Well Consistency is Key'
     } else {
@@ -40,7 +52,6 @@ function calculateExercises(hours: number[], duration: number): CalculatedValue 
     }
 }
 
-const hours = Array(process.argv[2])
-const duration = Number(process.argv[3])
+const {value1, value2} = parseArguments(process.argv);
 
-console.log(calculateExercises(hours, duration))
+console.log(calculateExercises(value2, value1))
