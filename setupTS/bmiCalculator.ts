@@ -1,4 +1,4 @@
-function calculateBmi(height: number, weight: number): string {
+export function calculateBmi(height: number, weight: number): string {
     const m = height /100;
     const bmi = weight / (m * m);
     if (bmi < 18.5) {
