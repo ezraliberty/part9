@@ -1,5 +1,5 @@
 export function calculateBmi(height: number, weight: number): string {
-    const m = height /100;
+    const m = height / 100;
     const bmi = weight / (m * m);
     if (bmi < 18.5) {
         return "Underweight range"
@@ -12,7 +12,9 @@ export function calculateBmi(height: number, weight: number): string {
     }
 }
 
-const height = Number(process.argv[2]);
-const weight = Number(process.argv[3]);
+if (require.main === module) {
+    const height = Number(process.argv[2]);
+    const weight = Number(process.argv[3]);
 
-console.log(calculateBmi(height, weight))
+    console.log(calculateBmi(height, weight))
+}
