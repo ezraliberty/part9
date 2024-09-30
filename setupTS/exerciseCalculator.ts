@@ -22,7 +22,7 @@ interface CalculatedValue {
     average: number
 }
 
-function calculateExercises(hours: number[], duration: number): CalculatedValue {
+export function calculateExercises(hours: number[], duration: number): CalculatedValue {
     const periodLength = hours.length;
     const trainingDays = hours.filter(h => h > 0).length
     const success = trainingDays > 6;
