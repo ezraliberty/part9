@@ -3,6 +3,7 @@ import { calculateBmi } from "./bmiCalculator";
 import { calculateExercises } from "./exerciseCalculator";
 const app = express();
 
+app.use(express.json());
 
 app.get("/hello", (_req, res) => {
     res.send("Hello Full Stack!");
@@ -27,7 +28,7 @@ app.post("/exercises", (req, res) => {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const exercises = calculateExercises(daily_exercises, Number(target));
-    res.json({})
+    res.json({exercises});
 });
 
 const PORT = 3006;
