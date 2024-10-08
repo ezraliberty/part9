@@ -1,8 +1,14 @@
 import { NewDiaryEntry, Visibility, Weather } from "./types";
 
+const newEntrySchema = z.object({
+  weather: z.nativeEnum(Weather),
+  visibility: z.nativeEnum(Visibility),
+  date: z.string().date(),
+  comment: z.string().optional()
+})
+
 const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
-  if (!object || typeof object !== "object") {
-    throw new Error("Incorrect or Missing Data");
+  return newEntrySchema.parse(object)
   }
 
   if (
@@ -12,10 +18,10 @@ const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
     "visibility" in object
   ) {
     const newEntry: NewDiaryEntry = {
-      weather: parseWeather(object.weather),
-      visibility: parseVisibility(object.visibility),
-      date: parseDate(object.date),
-      comment: parseComment(object.comment),
+      weather: z.nativeEnum(Weather).parse(object.weather),
+      visibility: z.nativeEnum(Visibility).parse(object.visibility),
+      date: z.string().date().parse(object.date),
+      comment: z.string().optional().parse(object.comment),
     };
     return newEntry;
   }
