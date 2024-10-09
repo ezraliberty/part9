@@ -1,7 +1,7 @@
-import { NewDiaryEntry, Visibility, Weather } from "./types";
+import { Visibility, Weather } from "./types";
 import { z } from "zod";
 
-export const newEntrySchema = z.object({
+export const NewEntrySchema = z.object({
   weather: z.nativeEnum(Weather),
   visibility: z.nativeEnum(Visibility),
   date: z.string().date(),
