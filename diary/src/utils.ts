@@ -1,4 +1,4 @@
-import { Visibility, Weather } from "./types";
+import { NewDiaryEntry, Visibility, Weather } from "./types";
 import { z } from "zod";
 
 export const NewEntrySchema = z.object({
@@ -7,3 +7,7 @@ export const NewEntrySchema = z.object({
   date: z.string().date(),
   comment: z.string().optional(),
 });
+
+export const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
+  return NewEntrySchema.parse(object);
+};
