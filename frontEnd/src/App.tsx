@@ -2,6 +2,8 @@ import Header from "./Header";
 import Content from "./Content";
 import Total from "./Total";
 
+type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground;
+
 interface CoursePartBasic {
   name: string;
   exerciseCount: number;
