@@ -7,8 +7,7 @@ interface CoursePartBase {
   exerciseCount: number;
 }
 
-interface CoursePartBasic extends CoursePartBase {
-  description: string;
+interface CoursePartBasic extends CoursePartDescription {
   kind: "basic";
 }
 
@@ -17,13 +16,26 @@ interface CoursePartGroup extends CoursePartBase {
   kind: "group";
 }
 
-interface CoursePartBackground extends CoursePartBase {
-  description: string;
+interface CoursePartBackground extends CoursePartDescription {
   backgroundMaterial: string;
   kind: "background";
 }
 
-type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground;
+interface CoursePartDescription extends CoursePartBase {
+  description: string;
+}
+
+interface CoursePartRequirements extends CoursePartDescription {
+  requirements: string[];
+  kind: "special";
+}
+
+type CoursePart =
+  | CoursePartBasic
+  | CoursePartGroup
+  | CoursePartBackground
+  | CoursePartDescription
+  | CoursePartRequirements;
 
 const App = () => {
   const courseName = "Half Stack Application Development";
@@ -57,7 +69,15 @@ const App = () => {
     {
       name: "TypeScript in frontend",
       exerciseCount: 10,
+      description: "A hard part",
       kind: "basic",
+    },
+    {
+      name: "Backend development",
+      exerciseCount: 21,
+      description: "Typing the backend",
+      requirements: ["nodejs", "jest"],
+      kind: "special",
     },
   ];
 
