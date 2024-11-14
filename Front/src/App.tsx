@@ -48,8 +48,9 @@ const App = () => {
     const diaryCreation = (event: React.SyntheticEvent) => {
         event.preventDefault()
         const { weather, visibility, date, comment } = newDiary;
-        createDiary({ weather, visibility, date, comment }).then(data => {
-            setDiaries(diaries.concat(data));
+        createDiary({ weather, visibility, date, comment })
+        .then((returnedDiary: Diary) => {
+            setDiaries(diaries.concat(returnedDiary));
         }).catch((e) => {
             console.log('component e', e)
             handleError(`${e.validation}: ${e.message}`)
